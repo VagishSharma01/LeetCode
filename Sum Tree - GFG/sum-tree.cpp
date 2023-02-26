@@ -123,7 +123,7 @@ class Solution
         if(left && right && cond)
         {
             ans.first = true;
-            ans.second = 2*root->data;
+           ans.second = 2*root->data;
         }
         else
         {
