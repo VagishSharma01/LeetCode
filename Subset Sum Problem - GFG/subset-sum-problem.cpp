@@ -6,49 +6,38 @@ using namespace std;
 
 // } Driver Code Ends
 //User function template for C++
-int v[101][100001];
+
 class Solution{   
 public:
-     
-bool isSubsetSum_(vector<int>set,int n,int sum)
-{   
-    //Base cases
-    if(sum==0)
-    {
-        return true;
-    }
-    if(n==0)
-    {
-        return false;
-    }
-
-    if(v[n][sum]!=-1)
-    {
-        return v[n][sum];
-    }
-
-    if(set[n-1]<=sum)
-    {
-       return v[n][sum]=isSubsetSum_(set,n-1,sum-set[n-1])||isSubsetSum_(set,n-1,sum);
-         
-    }
-    else
-    {
-       return  v[n][sum]=isSubsetSum_(set,n-1,sum);
-        
-    }
-    
-    return v[n][sum];
-
-}
-
     bool isSubsetSum(vector<int>arr, int sum){
         // code here 
-        
+       
         int n = arr.size();
-       memset(v,-1,sizeof(v));
-        return isSubsetSum_(arr,n,sum);
+         int v[n+1][sum+1];
+        //BASE INITIALIZATION
+        for (int i = 0; i <= n; i++){
+        v[i][0] = 1;
+        }
+        for (int i = 1; i <= sum; i++){
+        v[0][i] = 0;
+        }
         
+        for(int i=1;i<n+1;i++)
+        {
+            for(int j=1;j<sum+1;j++)
+            {
+                if(arr[i-1]<=j)
+                {
+                    v[i][j] = v[i-1][j-arr[i-1]] || v[i-1][j];
+                }
+                else
+                {
+                    v[i][j] = v[i-1][j];
+                }
+            }
+        }
+        
+        return v[n][sum];
     }
 };
 
