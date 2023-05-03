@@ -15,11 +15,19 @@ public:
         int n = arr.size();
          int v[n+1][sum+1];
         //BASE INITIALIZATION
-        for (int i = 0; i <= n; i++){
-        v[i][0] = 1;
-        }
-        for (int i = 1; i <= sum; i++){
-        v[0][i] = 0;
+        for(int i=0;i<=n;i++)
+        {
+            for(int j=0;j<=sum;j++)
+            {
+                if(i==0)
+                {
+                    v[i][j]=0;
+                }
+                if(j==0)
+                {
+                    v[i][j]=1;
+                }
+            }
         }
         
         for(int i=1;i<n+1;i++)
