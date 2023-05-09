@@ -25,7 +25,7 @@ class Solution{
             for(int j=0;j<sum+1;j++)
             {
                 if(ar[i-1]<=j)
-                tt[i][j]=(tt[i-1][j-ar[i-1]]%mod+tt[i-1][j]%mod)%mod;
+                tt[i][j]=(tt[i-1][j-ar[i-1]]+tt[i-1][j])%mod;
                 else
                 tt[i][j]=tt[i-1][j]%mod;
             }
