@@ -1,54 +1,54 @@
+
 class Solution {
 public:
     
-     vector<vector<int>> v;//global matrix for storing
+    bool solve(int ind,int target,vector<int>&arr, vector<vector<int>> &dp)
+    {
+        //base
+        if(target==0)
+        {
+            return true;
+        }
+        if(ind==0)
+        {
+            return (arr[ind]==target);
+        }
+        if(dp[ind][target] != -1)
+        {
+            return dp[ind][target];
+        }
         
-    bool isSubsetSum(vector<int>set,int n,int sum)
-{   
-    //Base cases
-    if(sum==0)
-    {
-        return true;
+        bool not_take = solve(ind-1,target,arr,dp);
+        bool take = false;
+        if(target>=arr[ind])
+        {
+            take = solve(ind-1,target-arr[ind],arr,dp);
+        }
+        
+        return dp[ind][target] = take || not_take;
+        
     }
-    if(n==0)
-    {
-        return false;
-    }
-
-    if(v[n][sum]!=-1)
-    {
-        return v[n][sum];
-    }
-
-    if(set[n-1]<=sum)
-    {
-        v[n][sum]=isSubsetSum(set,n-1,sum-set[n-1])||isSubsetSum(set,n-1,sum);
-        return v[n][sum];
-    }
-    else if(set[n-1]>sum)
-    {
-        v[n][sum]=isSubsetSum(set,n-1,sum);
-        return v[n][sum];
-    }
-        return v[n][sum];
-
-}
     
     bool canPartition(vector<int>& nums) {
         int n = nums.size();
         int sum=0;
         for(int i=0;i<n;i++)
         {
-            sum = sum+nums[i];
+         sum = sum+nums[i];   
         }
-        int t = sum/2;
-       v.resize(n + 1, vector<int>(t + 1, -1));//initialising -1
-        if(sum%2 !=0)
+        
+        int target = sum/2;
+        
+        vector<vector<int>> dp(n+1,vector<int>(sum+1,-1));
+        
+        if(sum%2 != 0)
         {
             return false;
         }
-            return isSubsetSum(nums,n,t);
-        
-        
+        else
+        {
+            bool ans = solve(n-1,target,nums,dp);
+            return ans;
+        }
     }
 };
