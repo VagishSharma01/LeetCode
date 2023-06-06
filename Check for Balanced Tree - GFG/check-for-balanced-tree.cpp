@@ -104,45 +104,44 @@ struct Node
 class Solution{
     public:
     
-    //Height Function
-    int height(Node* root)
-    {
-        if(root==NULL)
-        {
-            return NULL;
-        }
-        int l =height(root->left);
-        int r =height(root->right);
-        
-        int h = max(l,r)+1;
-        return h;
-    }
+     int height(Node* root)
+         {
+    //Base Case
+         if(root==NULL)
+            {
+        return 0;
+            }
+            int left = height(root->left);
+            int right = height(root->right);
+   
+    
+            int ans = max(left,right) +1;
+    
+            return ans;
+            }
     
     //Function to check whether a binary tree is balanced or not.
-    
     bool isBalanced(Node *root)
     {
         //  Your Code here
-        if(root==NULL)
+        if(root == NULL)
         {
-            return true;
+            return 1;
         }
         
         bool left = isBalanced(root->left);
         bool right = isBalanced(root->right);
         
-        bool diff = abs(height(root->left)-height(root->right)) <=1;
-        
+        int diff = abs(height(root->left) - height(root->right))<= 1;
         if(left && right && diff)
         {
-            return true;
+            return 1;
         }
         else
         {
-            return false;
+            return 0;
         }
         
-            
         
     }
 };
