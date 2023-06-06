@@ -96,49 +96,46 @@ class Solution
 {
     public:
     
-    pair<bool,int> isSumTreeFast(Node* root)
+    pair<bool,int> fast(Node* root)
     {
         if(root==NULL)
         {
-            pair<bool,int> p = make_pair(true,0);
-            return p;
+           pair<bool,int> p;
+           p.first=true;
+           p.second=0;
+           return p;
         }
         
-        if(root->left==NULL && root->right==NULL)
+        if(root->left == NULL && root->right == NULL)
         {
             pair<bool,int> p = make_pair(true,root->data);
             return p;
         }
         
-        pair<bool,int> leftAns =  isSumTreeFast(root->left);
-        pair<bool,int> rightAns =  isSumTreeFast(root->right);
+        pair<bool,int> left = fast(root->left);
+        pair<bool,int> right = fast(root->right);
+        bool l = left.first;
+        bool r = right.first;
         
-        bool left = leftAns.first;
-        bool right = rightAns.first;
-        
-        bool cond = root->data == leftAns.second+rightAns.second;
-        
+        bool condn = (root->data == left.second+right.second);
         pair<bool,int> ans;
-        
-        if(left && right && cond)
+        if(l && r && condn)
         {
-            ans.first = true;
-           ans.second = 2*root->data;
+            ans.first=true;
+            ans.second = 2*root->data;
         }
         else
         {
-            ans.first=false;
+            ans.first = false;
         }
-        
         return ans;
-        
     }
-    
     
     bool isSumTree(Node* root)
     {
          // Your code here
-         return isSumTreeFast(root).first;
+        pair<bool,int> ans = fast(root);
+        return ans.first;
          
     }
 };
