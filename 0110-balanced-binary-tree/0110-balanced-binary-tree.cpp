@@ -12,39 +12,81 @@
 class Solution {
 public:
     
-      int height(TreeNode* root)
-         {
-    //Base Case
-         if(root==NULL)
-            {
-        return 0;
-            }
-            int left = height(root->left);
-            int right = height(root->right);
+//       int height(TreeNode* root)
+//          {
+//     //Base Case
+//          if(root==NULL)
+//             {
+//         return 0;
+//             }
+//             int left = height(root->left);
+//             int right = height(root->right);
    
     
-            int ans = max(left,right) +1;
+//             int ans = max(left,right) +1;
     
-            return ans;
-            }
+//             return ans;
+//             }
     
-    bool isBalanced(TreeNode* root) {
+    pair<bool,int> isBalancedFast(TreeNode* root)
+    {
         if(root==NULL)
         {
-            return true;
+            pair<bool,int> p;
+            p.first=true;
+            p.second=0;
+            return p;
         }
-        bool left = isBalanced(root->left);
-        bool right = isBalanced(root->right);
+        pair<bool,int> left = isBalancedFast(root->left);
+        pair<bool,int> right = isBalancedFast(root->right);
         
-        bool diff = abs(height(root->left)-height(root->right))<=1;
-        if(left && right && diff)
+        bool l = left.first;
+        bool r = right.first;
+        int lh = left.second;
+        int rh = right.second;
+        
+        bool diff = (abs(lh-rh)<=1);
+        
+        pair<bool,int> ans;
+        ans.second = max(lh,rh)+1;
+        
+        if(l && r && diff)
         {
-            return true;
+            ans.first=true;
+            return ans;
         }
         else
         {
-            return false;
+            ans.first=false;
+            return ans;
         }
-        
     }
+    
+//     bool isBalanced(TreeNode* root) {
+//         if(root==NULL)
+//         {
+//             return true;
+//         }
+//         bool left = isBalanced(root->left);
+//         bool right = isBalanced(root->right);
+        
+//         bool diff = abs(height(root->left)-height(root->right))<=1;
+//         if(left && right && diff)
+//         {
+//             return true;
+//         }
+//         else
+//         {
+//             return false;
+//         }
+//     }
+    
+    bool isBalanced(TreeNode* root)
+    {
+        pair<bool,int> p = isBalancedFast(root);
+        bool ans = p.first;
+        return ans;
+    }
+    
+    
 };
