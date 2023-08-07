@@ -20,14 +20,17 @@ int main() {
 
 
 // C function to find maximum in arr[] of size n
-int largest(int arr[], int n) {
-    int v = arr[0];
+int largest(int arr[], int n) 
+{
+    int maxi = arr[0];
     for(int i=0;i<n;i++)
     {
-        if(v<arr[i])
+        if(maxi<arr[i])
         {
-            v = arr[i];
+            maxi = arr[i];
+            
         }
     }
-    return v;
+    return maxi;
+    
 }
