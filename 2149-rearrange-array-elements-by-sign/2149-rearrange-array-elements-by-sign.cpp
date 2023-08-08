@@ -2,32 +2,23 @@ class Solution {
 public:
     vector<int> rearrangeArray(vector<int>& nums) {
         int n = nums.size();
-        vector<int> pos;
-        vector<int> neg;
+        vector<int> ans(n,0);
+        int posind=0;
+        int negind =1;
         for(int i=0;i<n;i++)
         {
             if(nums[i]>0)
             {
-                pos.push_back(nums[i]);
+                ans[posind] = nums[i];
+                posind=posind+2;
             }
             else
             {
-                neg.push_back(nums[i]);
+                ans[negind] = nums[i];
+                negind=negind+2;
             }
         }
-        int posind=0;
-        for(int i=0;i<n/2;i++)
-        {
-            nums[posind]=pos[i];
-            posind=posind+2;
-        }
-        int negind=1;
-        for(int i=0;i<n/2;i++)
-        {
-            nums[negind]=neg[i];
-            negind=negind+2;
-        }
-        return nums;
+        return ans;
         
     }
 };
