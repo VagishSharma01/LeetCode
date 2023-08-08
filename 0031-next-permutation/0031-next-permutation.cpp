@@ -29,8 +29,8 @@ public:
         //if their is no index just reverse it
         if(ind==-1)
         {
-            //reverse_num(nums,0,n-1);
-            reverse(nums.begin(),nums.end());
+            reverse_num(nums,0,n-1);
+            //reverse(nums.begin(),nums.end());
             return nums;
         }
         
@@ -48,8 +48,8 @@ public:
         }
         //s3 sort the remaining 
         //we can use reverse function
-       // reverse_num(nums,ind+1,n-1);
-        reverse(nums.begin() + ind +1,nums.end());
+        reverse_num(nums,ind+1,n-1);
+        //reverse(nums.begin() + ind +1,nums.end());
         return nums;
     }
     
