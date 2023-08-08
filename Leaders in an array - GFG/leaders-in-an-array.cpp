@@ -14,23 +14,35 @@ class Solution{
     vector<int> leaders(int arr[], int n){
         // Code here
         vector<int> ans;
-        bool leader;
-        for(int i=0;i<n;i++)
+        // bool leader;
+        // for(int i=0;i<n;i++)
+        // {
+        //     leader=true;
+        //     for(int j=i+1;j<n;j++)
+        //     {
+        //         if(arr[j]>arr[i])
+        //         {
+        //             leader=false;
+        //             break;
+        //         }
+        //     }
+        //     if(leader==true)
+        //     {
+        //         ans.push_back(arr[i]);
+        //     }
+        // }
+        // return ans;
+        
+        int maxi =INT_MIN;
+        for(int i=n-1;i>=0;i--)
         {
-            leader=true;
-            for(int j=i+1;j<n;j++)
+            if(arr[i]>=maxi)
             {
-                if(arr[j]>arr[i])
-                {
-                    leader=false;
-                    break;
-                }
-            }
-            if(leader==true)
-            {
+                maxi = arr[i];
                 ans.push_back(arr[i]);
             }
         }
+        reverse(ans.begin(),ans.end());
         return ans;
     }
 };
