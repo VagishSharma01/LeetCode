@@ -1,17 +1,56 @@
 class Solution {
 public:
-    vector<int> searchRange(vector<int>& nums, int target) {
-        int first=-1; int last=-1;
-        int n=nums.size();
-        vector<int> ans;
-        for(int i=0;i<n;i++)
+    
+    int lb(vector<int>& arr, int target)
+    {
+        int n =arr.size();
+        int low=0;int high=n-1;
+        int ans=n;
+        while(low<=high)
         {
-            if(nums[i]==target)
+            int mid=(low+high)/2;
+            if(arr[mid]>=target)
             {
-                if(first==-1) first=i;
-                last=i;
+                ans=mid;
+                high = mid-1;
+            }
+            else
+            {
+                
+                low = mid+1;
             }
         }
+        return ans;
+    }
+    
+    int ub(vector<int>& arr, int target)
+    {
+        int n =arr.size();
+        int low=0;int high=n-1;
+        int ans=n;
+        while(low<=high)
+        {
+            int mid=(low+high)/2;
+            if(arr[mid]>target)
+            {
+                ans=mid;
+                high = mid-1;
+            }
+            else
+            {
+                low = mid+1;
+            }
+        }
+        return ans;
+    }
+    
+    vector<int> searchRange(vector<int>& nums, int target) {
+        vector<int> ans;
+        int first= lb(nums,target);
+        int last = ub(nums,target)-1;
+        
+        if(first==nums.size() || nums[first]!= target) return {-1,-1};
+        
         ans.push_back(first);
         ans.push_back(last);
         return ans;
